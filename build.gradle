@@ -1,0 +1,45 @@
+buildscript{
+    ext{
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories{
+        mavenCentral()
+        jcenter()
+        //레포지토리는 각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지 정한다.
+        //기본적으로 mavenCentral을 많이 사용하지만 최근에는 jcenter많이 사용(그래서 추가함)
+        //여기서는 둘 다 등록하여 사용
+
+    }
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+//17,18,19,20행 : 자바와 스프링부트를 사용하기 위한 필수 플러그인들, 항상 추가해 줘야한다.
+
+group 'com.test.doittest'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    //dependencies는 프로젝트 개방레 필요한 의존성들을 선언하는 곳
+    //7 버전부터 compile는 implementation / testCompile는 testImplementation
+}
+
+test {
+    useJUnitPlatform()
+}
